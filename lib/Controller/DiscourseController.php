@@ -89,7 +89,8 @@ class DiscourseController extends Controller {
                 $userEmail = $user->getEMailAddress();
 
                 $extraParameters = array(
-                     'username' => $this->replaceWhitespaces($userId),
+					 //'username' => $this->replaceWhitespaces($userId),                  # 20190109 NextCloud Displayname as Username in Discourse
+					 'username' => $this->replaceWhitespaces($user->getDisplayName()),  
                      'name'     => $user->getDisplayName(),
                      'add_groups' => $this->replaceWhitespaces($add_groups),
                      'remove_groups' => $this->replaceWhitespaces($remove_groups),
@@ -97,7 +98,8 @@ class DiscourseController extends Controller {
                 );
 
 		// build query string and redirect back to the Discourse site
-		$query = $ssoHelper->getSignInString($nonce, $this->replaceWhitespaces($userId), $userEmail, $extraParameters);
+		//$query = $ssoHelper->getSignInString($nonce, $this->replaceWhitespaces($userId), $userEmail, $extraParameters);
+		$query = $ssoHelper->getSignInString($nonce, $this->replaceWhitespaces($user->getDisplayName()), $userEmail, $extraParameters); // # 20190109 NextCloud Displayname as Username in Discourse
 		$url = $this->config->getAppValue($this->appName, 'clienturl', '');
 		$this->logger->error('url: '.$url, array('app' => 'discoursesso'));
 

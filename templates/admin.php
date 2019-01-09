@@ -48,7 +48,7 @@ style('discoursesso', 'admin');
 	<p>
 		<label>
 			<label for="discoursesso_replace_whitespaces" width="350" align="right">Replace Whitespaces</label>
-			<input type="text" name="discoursesso_replace_whitespaces" class="discoursesso_replace_whitespaces" placeholder="for usernames, group IDs (e.g. '_')" value="<?php p($_['replace_whitepsaces']) ?>" style="width: 300px;" />
+			<input type="text" name="discoursesso_replace_whitespaces" class="discoursesso_replace_whitespaces" placeholder="for usernames, group IDs (e.g. '_')" value="<?php p($_['replace_whitespaces']) ?>" style="width: 300px;" />
 			<img class="svg action saved-info hidden" src="/core/img/actions/checkmark.svg" title="Configuration saved">
 		</label>
 	</p>	
