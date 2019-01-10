@@ -39,8 +39,20 @@ class DiscourseController extends Controller {
 		} else {
 				return $string;
 		}
-}
+	}
 
+	private function matchGroupsToDiscourse($string) {
+		$groupMatches = array("admin");
+		foreach ($groupMatches as $group) {
+				switch ($group) {
+						case "admin":
+								$string = preg_replace('/admin/', "admins", $string);
+								break;
+
+				}
+		}
+		return $string;
+	}
 
 	/**
 	 * CAUTION: the @Stuff turns off security checks; for this page no admin is
@@ -94,9 +106,9 @@ class DiscourseController extends Controller {
 					 //'username' => $this->replaceWhitespaces($userId),                  # 20190109 NextCloud Displayname as Username in Discourse
 					 'username' => $this->replaceWhitespaces($user->getDisplayName()),  
                      'name'     => $user->getDisplayName(),
-                     'add_groups' => $this->replaceWhitespaces($add_groups),
-                     'remove_groups' => $this->replaceWhitespaces($remove_groups),
-                     'groups' => $this->replaceWhitespaces($add_groups)
+                     'add_groups' => $this->matchGroupsToDiscourse($this->replaceWhitespaces($add_groups)),
+                     'remove_groups' => $this->matchGroupsToDiscourse($this->replaceWhitespaces($remove_groups)),
+                     'groups' => $this->matchGroupsToDiscourse($this->replaceWhitespaces($add_groups))
                 );
 
 		// build query string and redirect back to the Discourse site
