@@ -32,13 +32,15 @@ class DiscourseController extends Controller {
 	}
 
 	private function replaceWhitespaces($string) {
-		$replaceString = $this->config->getAppValue($this->appName, 'replaceWhitespaces', '');
+		$replaceString = $this->config->getAppValue($this->appName, 'replace_whitespaces', '');
 		if ($replaceString !== '') {
-			return preg_replace('/\s+/', $replaceString, $string);
+				$string = preg_replace('/\s+/', $replaceString, $string);	
+				return $string;
 		} else {
-			return $string;
+				return $string;
 		}
-	}
+}
+
 
 	/**
 	 * CAUTION: the @Stuff turns off security checks; for this page no admin is
