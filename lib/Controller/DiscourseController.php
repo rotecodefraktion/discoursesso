@@ -42,17 +42,20 @@ class DiscourseController extends Controller {
 	}
 
 	private function matchGroupsToDiscourse($string) {
-		$groupMatches = array("admin");
+		$groupMatches = array("admin", "Öffentlichkeitsarbeit");
 		foreach ($groupMatches as $group) {
 				switch ($group) {
 						case "admin":
 								$string = preg_replace('/admin/', "admins", $string);
 								break;
-
-				}
+						case "\xc3\x96ffentlichkeitsarbeit":
+								$string = preg_replace('/\xc3\x96ffentlichkeitsarbeit/', "OEArbeit", $string);
+								break;
+						}
 		}
 		return $string;
-	}
+}
+
 
 	/**
 	 * CAUTION: the @Stuff turns off security checks; for this page no admin is
